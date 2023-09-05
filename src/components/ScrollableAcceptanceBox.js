@@ -3,20 +3,22 @@ import {Box, Button, Typography} from "@mui/material";
 function ScrollableAcceptanceBox() {
     return <Box
         sx={{
-            width: "400px",
+            width: "500px",
             display: "flex",
             flexDirection: "column",
+            backgroundColor: "#ffffff"
         }}
     >
-        <Typography>Terms of Service</Typography>
-        <Typography>Last updated August 2023</Typography>
+        <Typography variant="h5" sx={{mt: 1, ml: 2}}>Terms of Service</Typography>
+        <Typography variant="h6" sx={{ml: 2}}>Last updated August 2023</Typography>
         <Box
             sx={{
-                height: "200px",
+                height: "300px",
+                mx: 1,
                 overflow: "auto",
             }}
         >
-            <Typography>
+            <Typography sx={{m: 1}}>
                 Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum mattis, metus a finibus elementum,
                 ligula ex convallis leo, non rutrum lacus odio in purus. Phasellus quis justo efficitur, aliquam massa
                 sit amet, accumsan lectus. Nam ac ante mollis, mattis arcu ut, consectetur nunc. Morbi nec commodo odio.
@@ -56,9 +58,15 @@ function ScrollableAcceptanceBox() {
                 semper orci, sit amet euismod lacus porta et.
             </Typography>
         </Box>
-        <Box>
-            <Button>Decline</Button>
-            <Button>Accept</Button>
+        <Box
+            sx={{
+                display: "flex",
+                flexDirection: "row",
+                justifyContent: "center",
+            }}
+        >
+            <Button variant="outlined" color="success" sx={{m: 2, px: 4, py: 2}}>Decline</Button>
+            <Button variant="contained" disabled sx={{m: 2,  px: 4, py: 2}}>Accept</Button>
         </Box>
     </Box>
 }
