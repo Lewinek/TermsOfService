@@ -12,7 +12,7 @@ function App() {
                 display: "flex",
                 justifyContent: "center",
                 alignItems: "center",
-                backgroundColor: "#a3ada6"
+                backgroundColor: "#D4D9DB"
             }}
         >
             <ScrollableAcceptanceBox></ScrollableAcceptanceBox>
