@@ -1,4 +1,4 @@
-import {Box, Typography} from "@mui/material";
+import {Box, Button, Typography} from "@mui/material";
 
 function ScrollableAcceptanceBox() {
     return <Box
@@ -55,6 +55,10 @@ function ScrollableAcceptanceBox() {
                 malesuada nunc nec mi placerat, vel pulvinar ligula dignissim. Nulla quis nulla turpis. Aenean mattis
                 semper orci, sit amet euismod lacus porta et.
             </Typography>
+        </Box>
+        <Box>
+            <Button>Decline</Button>
+            <Button>Accept</Button>
         </Box>
     </Box>
 }
