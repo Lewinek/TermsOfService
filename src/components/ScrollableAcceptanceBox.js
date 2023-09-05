@@ -1,6 +1,21 @@
 import {Box, Button, Typography} from "@mui/material";
+import {useState} from "react";
 
 function ScrollableAcceptanceBox() {
+
+    const [isButtonDisabled, setIsButtonDisabled] = useState(true);
+
+    window.onload = function () {
+        const termsBox = document.getElementById('termsBox');
+        termsBox.addEventListener('scroll', () => {
+            const isScrollbarAtBottom = termsBox.scrollTop + termsBox.clientHeight >= termsBox.scrollHeight;
+
+            if (isScrollbarAtBottom) {
+                setIsButtonDisabled(false)
+            }
+        });
+    };
+
     return <Box
         sx={{
             width: "500px",
@@ -12,6 +27,7 @@ function ScrollableAcceptanceBox() {
         <Typography variant="h5" sx={{mt: 1, ml: 2}}>Terms of Service</Typography>
         <Typography variant="h6" sx={{ml: 2}}>Last updated August 2023</Typography>
         <Box
+            id="termsBox"
             sx={{
                 height: "300px",
                 mx: 1,
@@ -66,7 +82,8 @@ function ScrollableAcceptanceBox() {
             }}
         >
             <Button variant="outlined" color="success" sx={{m: 2, px: 4, py: 2}}>Decline</Button>
-            <Button variant="contained" disabled sx={{m: 2,  px: 4, py: 2}}>Accept</Button>
+            <Button id="acceptableButton" variant="contained" disabled={isButtonDisabled}
+                    sx={{m: 2, px: 4, py: 2}}>Accept</Button>
         </Box>
     </Box>
 }
