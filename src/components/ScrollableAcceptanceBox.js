@@ -1,20 +1,28 @@
 import {Box, Button, Typography} from "@mui/material";
-import {useState} from "react";
+import {useEffect, useState} from "react";
 
-function ScrollableAcceptanceBox() {
+function ScrollableAcceptanceBox({terms, lastUpdated, onAccept, onDecline}) {
 
     const [isButtonDisabled, setIsButtonDisabled] = useState(true);
 
-    window.onload = function () {
-        const termsBox = document.getElementById('termsBox');
-        termsBox.addEventListener('scroll', () => {
-            const isScrollbarAtBottom = termsBox.scrollTop + termsBox.clientHeight >= termsBox.scrollHeight;
+    useEffect(() => {
+        const termsContainer = document.getElementById("termsContainer");
+
+        const handleScroll = () => {
+            const isScrollbarAtBottom =
+                termsContainer.scrollTop + termsContainer.clientHeight >= termsContainer.scrollHeight;
 
             if (isScrollbarAtBottom) {
-                setIsButtonDisabled(false)
+                setIsButtonDisabled(false);
             }
-        });
-    };
+        };
+
+        termsContainer.addEventListener("scroll", handleScroll);
+
+        return () => {
+            termsContainer.removeEventListener("scroll", handleScroll);
+        };
+    }, []);
 
     return <Box
         sx={{
@@ -25,54 +33,16 @@ function ScrollableAcceptanceBox() {
         }}
     >
         <Typography variant="h5" sx={{mt: 1, ml: 2}}>Terms of Service</Typography>
-        <Typography variant="h6" sx={{ml: 2}}>Last updated August 2023</Typography>
+        <Typography variant="h6" sx={{ml: 2}}>Last updated {lastUpdated}</Typography>
         <Box
-            id="termsBox"
+            id="termsContainer"
             sx={{
                 height: "300px",
                 mx: 1,
                 overflow: "auto",
             }}
         >
-            <Typography sx={{m: 1}}>
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum mattis, metus a finibus elementum,
-                ligula ex convallis leo, non rutrum lacus odio in purus. Phasellus quis justo efficitur, aliquam massa
-                sit amet, accumsan lectus. Nam ac ante mollis, mattis arcu ut, consectetur nunc. Morbi nec commodo odio.
-                Vestibulum eu pretium lacus. Sed posuere ipsum dolor, non efficitur nisl cursus et. Sed tortor risus,
-                viverra eget ultricies ut, convallis dapibus neque. Duis fermentum mauris at arcu porta suscipit a
-                viverra urna. Nullam malesuada libero et elit blandit rutrum at in nisl. Suspendisse at leo suscipit,
-                dictum ex quis, fringilla lectus.
-
-                Donec venenatis lacus eget euismod ullamcorper. Etiam mi justo, semper sed euismod et, bibendum ac
-                nulla. Fusce maximus placerat tortor, vitae venenatis orci scelerisque non. Praesent mattis efficitur
-                molestie. In placerat ipsum porta ornare malesuada. Donec sed ornare nisl, at ultrices mauris. Fusce
-                tempor auctor ex, quis blandit metus dignissim at. Nulla quis tellus nibh. Maecenas nec erat pulvinar,
-                cursus sapien a, porta augue. Cras eget justo justo. Vivamus blandit ut massa eu mattis.
-
-                Vestibulum porttitor, dolor varius tincidunt vulputate, libero sem scelerisque ex, pellentesque viverra
-                metus leo in lectus. Curabitur lacinia, lectus eget euismod mattis, elit elit egestas ante, nec
-                convallis diam elit et augue. Aenean porttitor ornare nisl. Curabitur nec lectus dignissim, dapibus
-                metus id, pretium justo. Phasellus tincidunt tellus mauris, imperdiet porta diam lobortis at. In non
-                purus mauris. Vestibulum consectetur sapien ac ligula porttitor, a posuere quam porttitor. Pellentesque
-                imperdiet, urna id feugiat blandit, neque magna rutrum nisl, a ultricies tellus augue quis sem. Integer
-                pellentesque tellus non erat interdum mattis. Proin in volutpat neque, nec eleifend risus. Ut vulputate,
-                leo at facilisis efficitur, sem orci viverra tortor, nec aliquet leo lorem quis velit. In egestas
-                accumsan mauris vel volutpat. Sed felis nibh, accumsan ut dolor sed, maximus cursus mi. In scelerisque
-                vel nibh sed varius.
-
-                Proin placerat enim non est lacinia ornare. Aenean vulputate dictum ullamcorper. Donec posuere neque
-                metus, et convallis velit consectetur nec. Quisque ut ante a nulla dignissim venenatis. Praesent nec
-                semper dui, ut iaculis nisl. Curabitur lacinia sollicitudin massa a posuere. Donec eget mauris lacus.
-                Nulla quis augue et sapien consequat consectetur sit amet non felis. Integer eget felis massa.
-                Vestibulum sit amet viverra quam. Vestibulum imperdiet ante libero, in dapibus magna rhoncus a. Nam
-                euismod felis sed diam consectetur vulputate. Aliquam ut facilisis urna, eget rhoncus purus. Praesent
-                mauris nisl, mattis a nibh id, rhoncus faucibus magna. Nullam in dapibus lorem, imperdiet aliquam est.
-
-                Donec sollicitudin tortor ac viverra mattis. Donec egestas mauris eget enim faucibus maximus. Quisque
-                vitae diam nec orci dictum molestie. Cras sit amet pellentesque massa. Maecenas a nisl orci. Aliquam
-                malesuada nunc nec mi placerat, vel pulvinar ligula dignissim. Nulla quis nulla turpis. Aenean mattis
-                semper orci, sit amet euismod lacus porta et.
-            </Typography>
+            <Typography sx={{m: 1}}>{terms}</Typography>
         </Box>
         <Box
             sx={{
@@ -81,9 +51,19 @@ function ScrollableAcceptanceBox() {
                 justifyContent: "center",
             }}
         >
-            <Button variant="outlined" color="success" sx={{m: 2, px: 4, py: 2}}>Decline</Button>
-            <Button id="acceptableButton" variant="contained" disabled={isButtonDisabled}
-                    sx={{m: 2, px: 4, py: 2}}>Accept</Button>
+            <Button
+                variant="outlined"
+                color="success"
+                sx={{m: 2, px: 4, py: 2}}
+                onClick={onDecline}
+            >Decline</Button>
+            <Button
+                id="acceptableButton"
+                variant="contained"
+                disabled={isButtonDisabled}
+                sx={{m: 2, px: 4, py: 2}}
+                onClick={onAccept}
+            >Accept</Button>
         </Box>
     </Box>
 }
