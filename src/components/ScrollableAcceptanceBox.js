@@ -1,9 +1,10 @@
 import {Box, Button, Typography} from "@mui/material";
 import {useEffect, useState} from "react";
 
-function ScrollableAcceptanceBox({terms, lastUpdated, onAccept, onDecline}) {
+function ScrollableAcceptanceBox({terms, lastUpdated}) {
 
     const [isButtonDisabled, setIsButtonDisabled] = useState(true);
+    const [isAccepted, setIsAccepted] = useState(false);
 
     useEffect(() => {
         const termsContainer = document.getElementById("termsContainer");
@@ -24,10 +25,14 @@ function ScrollableAcceptanceBox({terms, lastUpdated, onAccept, onDecline}) {
         };
     }, []);
 
+    const handleAcceptClick = () => {
+        setIsAccepted(true);
+    };
+
     return <Box
         sx={{
             width: "500px",
-            display: "flex",
+            display: isAccepted ? "none" : "flex",
             flexDirection: "column",
             backgroundColor: "#ffffff",
             p: 2
@@ -58,7 +63,6 @@ function ScrollableAcceptanceBox({terms, lastUpdated, onAccept, onDecline}) {
                 variant="outlined"
                 color="success"
                 sx={{m: 2, px: 6, py: 2, fontWeight: `bold`, color: `#33b249`, borderColor: `33b249`}}
-                onClick={onDecline}
             >Decline</Button>
             <Button
                 size="large"
@@ -66,7 +70,7 @@ function ScrollableAcceptanceBox({terms, lastUpdated, onAccept, onDecline}) {
                 variant="contained"
                 disabled={isButtonDisabled}
                 sx={{m: 2, px: 6, py: 2, fontWeight: `bold`, backgroundColor: `#33b249`}}
-                onClick={onAccept}
+                onClick={handleAcceptClick}
             >Accept</Button>
         </Box>
     </Box>
