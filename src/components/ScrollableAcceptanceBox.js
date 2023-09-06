@@ -29,17 +29,19 @@ function ScrollableAcceptanceBox({terms, lastUpdated, onAccept, onDecline}) {
             width: "500px",
             display: "flex",
             flexDirection: "column",
-            backgroundColor: "#ffffff"
+            backgroundColor: "#ffffff",
+            p: 2
         }}
     >
-        <Typography variant="h5" sx={{mt: 1, ml: 2}}>Terms of Service</Typography>
-        <Typography variant="h6" sx={{ml: 2}}>Last updated {lastUpdated}</Typography>
+        <Typography variant="h5" sx={{mt: 1, ml: 2, fontWeight: `bold`}}>Terms of Service</Typography>
+        <Typography variant="h6" sx={{ml: 2, color: `#808080`}}>Last updated {lastUpdated}</Typography>
         <Box
             id="termsContainer"
             sx={{
-                height: "300px",
+                height: "400px",
                 mx: 1,
                 overflow: "auto",
+                pt: 2
             }}
         >
             <Typography sx={{m: 1}}>{terms}</Typography>
@@ -52,16 +54,18 @@ function ScrollableAcceptanceBox({terms, lastUpdated, onAccept, onDecline}) {
             }}
         >
             <Button
+                size="large"
                 variant="outlined"
                 color="success"
-                sx={{m: 2, px: 4, py: 2}}
+                sx={{m: 2, px: 6, py: 2, fontWeight: `bold`, color: `#33b249`, borderColor: `33b249`}}
                 onClick={onDecline}
             >Decline</Button>
             <Button
+                size="large"
                 id="acceptableButton"
                 variant="contained"
                 disabled={isButtonDisabled}
-                sx={{m: 2, px: 4, py: 2}}
+                sx={{m: 2, px: 6, py: 2, fontWeight: `bold`, backgroundColor: `#33b249`}}
                 onClick={onAccept}
             >Accept</Button>
         </Box>
