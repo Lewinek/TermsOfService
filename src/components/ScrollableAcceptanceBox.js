@@ -2,7 +2,6 @@ import {Box, Button, Typography} from "@mui/material";
 import {useEffect, useState} from "react";
 
 function ScrollableAcceptanceBox({terms, lastUpdated}) {
-
     const [isButtonDisabled, setIsButtonDisabled] = useState(true);
     const [isAccepted, setIsAccepted] = useState(false);
 
@@ -69,7 +68,10 @@ function ScrollableAcceptanceBox({terms, lastUpdated}) {
                 id="acceptableButton"
                 variant="contained"
                 disabled={isButtonDisabled}
-                sx={{m: 2, px: 6, py: 2, fontWeight: `bold`, backgroundColor: `#33b249`}}
+                sx={{
+                    m: 2, px: 6, py: 2, fontWeight: `bold`, backgroundColor: `#33b249`,
+                    ":hover": {backgroundColor: "#33b249"}
+                }}
                 onClick={handleAcceptClick}
             >Accept</Button>
         </Box>
