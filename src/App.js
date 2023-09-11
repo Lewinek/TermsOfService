@@ -15,6 +15,13 @@ function App() {
         }
     })
 
+    const handleAcceptClick = () => {
+        console.log("Click")
+        // eslint-disable-next-line no-undef
+        const replayer = new rrweb.Replayer(events);
+        replayer.play();
+    };
+
     return (
         <Box
             sx={{
@@ -65,6 +72,7 @@ function App() {
                 vitae diam nec orci dictum molestie. Cras sit amet pellentesque massa. Maecenas a nisl orci. Aliquam
                 malesuada nunc nec mi placerat, vel pulvinar ligula dignissim. Nulla quis nulla turpis. Aenean mattis
                 semper orci, sit amet euismod lacus porta et."
+                onAcceptClick={handleAcceptClick}
             >
             </ScrollableAcceptanceBox>
         </Box>
