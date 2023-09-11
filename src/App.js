@@ -4,27 +4,6 @@ import ScrollableAcceptanceBox from "./components/ScrollableAcceptanceBox";
 import {Box} from "@mui/material";
 
 function App() {
-    // eslint-disable-next-line no-undef
-    userBehaviour.start()
-    // eslint-disable-next-line no-undef
-    console.log(userBehaviour.showResult())
-    // eslint-disable-next-line no-undef
-    userBehaviour.config({
-        userInfo: true,
-        clicks: true,
-        mouseMovement: true,
-        mouseMovementInterval: 1,
-        mouseScroll: true,
-        timeCount: true,
-        clearAfterProcess: true,
-        processTime: 1,
-        processData: function (results) {
-            console.log(results);
-        }
-    })
-
-    // eslint-disable-next-line no-undef
-    let results = userBehaviour.processResults();
     return (
         <Box
             sx={{
@@ -80,6 +59,5 @@ function App() {
         </Box>
     )
 }
-
 
 export default App;

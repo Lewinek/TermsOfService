@@ -26,11 +26,6 @@ function ScrollableAcceptanceBox({terms, lastUpdated}) {
 
     const handleAcceptClick = () => {
         setIsAccepted(true);
-        // eslint-disable-next-line no-undef
-        userBehaviour.stop();
-        // eslint-disable-next-line no-undef
-        console.log(userBehaviour.processResults())
-
     };
 
     return <Box
