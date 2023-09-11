@@ -7,9 +7,11 @@ function App() {
     let events = [];
     // eslint-disable-next-line no-undef
     rrweb.record({
-        emit(event){
-            events.push(event)
-            // console.log(event)
+        emit(event) {
+            if (events.length < 20) {
+                events.push(event)
+                console.log(event)
+            }
         }
     })
 
