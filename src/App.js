@@ -4,6 +4,15 @@ import ScrollableAcceptanceBox from "./components/ScrollableAcceptanceBox";
 import {Box} from "@mui/material";
 
 function App() {
+    let events = [];
+    // eslint-disable-next-line no-undef
+    rrweb.record({
+        emit(event){
+            events.push(event)
+            // console.log(event)
+        }
+    })
+
     return (
         <Box
             sx={{
