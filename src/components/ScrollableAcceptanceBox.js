@@ -1,7 +1,7 @@
 import {Box, Button, Typography} from "@mui/material";
 import {useEffect, useState} from "react";
 
-function ScrollableAcceptanceBox({terms, lastUpdated}) {
+function ScrollableAcceptanceBox({terms, lastUpdated, onAcceptClick}) {
     const [isButtonDisabled, setIsButtonDisabled] = useState(true);
     const [isAccepted, setIsAccepted] = useState(false);
 
@@ -25,12 +25,8 @@ function ScrollableAcceptanceBox({terms, lastUpdated}) {
     }, []);
 
     const handleAcceptClick = () => {
+        onAcceptClick();
         setIsAccepted(true);
-        // eslint-disable-next-line no-undef
-        userBehaviour.stop();
-        // eslint-disable-next-line no-undef
-        console.log(userBehaviour.processResults())
-
     };
 
     return <Box

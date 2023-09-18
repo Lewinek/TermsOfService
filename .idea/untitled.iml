@@ -9,6 +9,8 @@
     </content>
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />
-    <orderEntry type="library" name="userBehaviour" level="application" />
+    <orderEntry type="library" name="rrweb" level="application" />
+    <orderEntry type="library" name="rrweb-player" level="application" />
+    <orderEntry type="library" name="rrweb" level="application" />
   </component>
 </module>
