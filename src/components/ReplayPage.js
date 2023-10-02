@@ -5,36 +5,36 @@ import { useLocation } from "react-router-dom";
 function ReplayPage() {
     const location = useLocation();
     const events = location.state.events;
-    const sessionReplayer = useRef(null);
-
-    console.log('replay page');
+    const sessionPlayer = useRef(null);
 
     useEffect(() => {
-        if (!sessionReplayer.current && events.length > 0) {
-            // eslint-disable-next-line no-undef
-            sessionReplayer.current = new rrwebPlayer({
-                target: document.body,
-                data: {
-                    events,
-                }
-            });
-
-            sessionReplayer.current.addEventListener('finish', () => {
-                console.log('finish');
-            });
-
-            return () => {
-                if (sessionReplayer.current) {
-                    sessionReplayer.current.pause();
-                    sessionReplayer.current = null;
-                }
-            };
+        if (!sessionPlayer.current && events.length > 0) {
+            if (typeof rrwebPlayer !== 'undefined') {
+                // eslint-disable-next-line no-undef
+                sessionPlayer.current = new rrwebPlayer({
+                    target: document.body,
+                    data: {
+                        events,
+                    }
+                });
+                sessionPlayer.current.addEventListener('finish', () => {
+                    console.log('finish');
+                });
+                return () => {
+                    if (sessionPlayer.current) {
+                        sessionPlayer.current.pause();
+                        sessionPlayer.current = null;
+                    }
+                };
+            } else {
+                console.error('rrwebPlayer is not defined. Make sure it is imported and available.');
+            }
         }
-    }, []);
+    }, [events]);
 
     return (
         <Box>
-            <Typography variant="h5" sx={{ mt: 1, ml: 2, fontWeight: `bold` }}>
+            <Typography variant="h5" sx={{ mt: 1, ml: 2, fontWeight: 'bold' }}>
                 Replay
             </Typography>
         </Box>
