@@ -2,6 +2,7 @@ import React from 'react';
 import {Box} from "@mui/material";
 import ScrollableAcceptanceBox from "./ScrollableAcceptanceBox";
 import {useNavigate} from 'react-router-dom';
+import {EventType} from "rrweb";
 
 function TermsPage() {
     let events = [];
@@ -12,10 +13,26 @@ function TermsPage() {
         emit(event) {
             events.push(event)
             console.log(event)
+            if (event.type === EventType.Custom) {
+                console.log('Niestandardowe zdarzenie zostało dodane:', event);
+            }
         }
     })
 
     const handleAcceptClick = () => {
+        const currentDate = new Date();
+
+        const customEvent = {
+            eventType: EventType.Custom,
+            timestamp: currentDate.toISOString(),
+            data: {
+                message: 'Kliknięto przycisk o akceptacji',
+            },
+        }
+
+        // eslint-disable-next-line no-undef
+        rrweb.record.addCustomEvent(customEvent.eventType, customEvent);
+
         console.log("before nav")
         navigate('/replay', {state: {events}});
     };
